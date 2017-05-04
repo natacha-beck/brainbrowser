@@ -93,7 +93,7 @@ $(function() {
         volumes = [
           {
             type: "nifti1",
-            nii_url: "models/functional.nii",
+            nii_url: "BrainBrowserVolumeUI/models/functional.nii",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -101,7 +101,7 @@ $(function() {
           },
           {
             type: 'nifti1',
-            nii_url: "models/structural.nii",
+            nii_url: "BrainBrowserVolumeUI/models/structural.nii",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -112,7 +112,7 @@ $(function() {
         volumes = [
           {
             type: "mgh",
-            url: "models/t1.mgh",
+            url: "BrainBrowserVolumeUI/models/t1.mgh",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -120,7 +120,7 @@ $(function() {
           },
           {
             type: 'mgh',
-            url: "models/dti.mgh",
+            url: "BrainBrowserVolumeUI/models/dti.mgh",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
