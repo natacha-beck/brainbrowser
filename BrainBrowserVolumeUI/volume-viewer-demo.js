@@ -60,8 +60,8 @@ $(function() {
         volumes = [
           {
             type: "minc",
-            header_url: "models/functional.mnc.header",
-            raw_data_url: "models/functional.mnc.raw",
+            header_url: "BrainBrowserVolumeUI/models/functional.mnc.header",
+            raw_data_url: "BrainBrowserVolumeUI/models/functional.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -72,8 +72,8 @@ $(function() {
         volumes = [
           {
             type: "minc",
-            header_url: "models/structural1.mnc.header",
-            raw_data_url: "models/structural1.mnc.raw",
+            header_url: "BrainBrowserVolumeUI/models/structural1.mnc.header",
+            raw_data_url: "BrainBrowserVolumeUI/models/structural1.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -81,8 +81,8 @@ $(function() {
           },
           {
             type: 'minc',
-            header_url: "models/structural2.mnc.header",
-            raw_data_url: "models/structural2.mnc.raw",
+            header_url: "BrainBrowserVolumeUI/models/structural2.mnc.header",
+            raw_data_url: "BrainBrowserVolumeUI/models/structural2.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
