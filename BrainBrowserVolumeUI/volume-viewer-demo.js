@@ -60,8 +60,8 @@ $(function() {
         volumes = [
           {
             type: "minc",
-            header_url: "BrainBrowserVolumeUI/models/functional.mnc.header",
-            raw_data_url: "BrainBrowserVolumeUI/models/functional.mnc.raw",
+            header_url: "models/functional.mnc.header",
+            raw_data_url: "models/functional.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -72,8 +72,8 @@ $(function() {
         volumes = [
           {
             type: "minc",
-            header_url: "BrainBrowserVolumeUI/models/structural1.mnc.header",
-            raw_data_url: "BrainBrowserVolumeUI/models/structural1.mnc.raw",
+            header_url: "models/structural1.mnc.header",
+            raw_data_url: "models/structural1.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -81,8 +81,8 @@ $(function() {
           },
           {
             type: 'minc',
-            header_url: "BrainBrowserVolumeUI/models/structural2.mnc.header",
-            raw_data_url: "BrainBrowserVolumeUI/models/structural2.mnc.raw",
+            header_url: "models/structural2.mnc.header",
+            raw_data_url: "models/structural2.mnc.raw",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -93,7 +93,7 @@ $(function() {
         volumes = [
           {
             type: "nifti1",
-            nii_url: "BrainBrowserVolumeUI/models/functional.nii",
+            nii_url: "models/functional.nii",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -101,7 +101,7 @@ $(function() {
           },
           {
             type: 'nifti1',
-            nii_url: "BrainBrowserVolumeUI/models/structural.nii",
+            nii_url: "models/structural.nii",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -112,7 +112,7 @@ $(function() {
         volumes = [
           {
             type: "mgh",
-            url: "BrainBrowserVolumeUI/models/t1.mgh",
+            url: "models/t1.mgh",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
@@ -120,7 +120,7 @@ $(function() {
           },
           {
             type: 'mgh',
-            url: "BrainBrowserVolumeUI/models/dti.mgh",
+            url: "models/dti.mgh",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"
