@@ -89,6 +89,7 @@ var ModelLoader = function(BrainBrowserViewer){
     this.viewer.loadModelFromFile(fileOpenerElem, {
       format: type,
       complete: function(){
+        viewer.modelCentric();
         that.doneOpeningFile();
         document.getElementById('modelFilename').innerHTML = "";
         document.getElementById('noteModelFilename').innerHTML = "";
