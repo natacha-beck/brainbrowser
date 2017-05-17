@@ -171,6 +171,7 @@
 (function() {
   "use strict";
 
+
   var SurfaceViewer = BrainBrowser.SurfaceViewer = {
 
     /**
@@ -207,7 +208,11 @@
     *   });
     * ```
     */
+
     start: function(element, callback) {
+
+      // Add keyboard controls
+      keyboardControls();
 
       console.log("BrainBrowser Surface Viewer v" + BrainBrowser.version);
 
@@ -545,6 +550,25 @@
           viewer.updated = true;
         }
       });
+
+      // Set up global keyboard interactions.
+      function keyboardControls() {
+        document.addEventListener("keyup", function(e) {
+          var key = e.which;
+          // o
+          if (key === 79) {
+            if (viewer.totalOffset) {
+              var totalOffset = viewer.totalOffset;
+              var orig = new THREE.Vector3(-totalOffset.x, -totalOffset.y, -totalOffset.z);
+              viewer.changeCenterRotation2(orig);
+            }
+          }
+          // c
+          if (key === 67) {
+            viewer.modelCentric();
+          }
+        });
+      }
 
       //////////////////////////////////////////////////////
       // Prepare workers and pass SurfaceViewer instance

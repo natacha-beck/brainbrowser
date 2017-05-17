@@ -66,7 +66,7 @@ var ModelLoader = function(BrainBrowserViewer){
       this.loadModelFile(evt.target, type);
     }else{
       document.getElementById('modelFilename').innerHTML     = "Filename: " + file.name;
-      document.getElementById('noteModelFilename').innerHTML = "<b>Note:</b> Select a file format and load"
+      document.getElementById('noteModelFilename').innerHTML = "<b>Note:</b> Select a file format and load";
       document.getElementById("modelFormatSelector").value   = "unknown";
     }
   };

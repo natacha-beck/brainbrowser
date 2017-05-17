@@ -770,6 +770,88 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   };
 
 
+  /**
+  * @doc function
+  * @name viewer.rendering:modelCentric
+  *
+  * @description
+  * Use to recenter data when userData input is shifted in space.
+  *
+  *
+  * ```js
+  * viewer.modelCentric(true);
+  * ```
+  */
+  viewer.modelCentric = function() {
+    var model = viewer.model;
+    viewer.findUserDataCentroid(model);
+    var center = model.userData.model_center || new THREE.Vector3(0,0,0);
+
+    // Set center position
+    viewer.changeCenterRotation2(center);
+
+    viewer.updated = true;
+  };
+
+
+  /**
+  * @doc function
+  * @name viewer.rendering:findUserDataCentroid
+  * @param {object} a model.
+  *
+  * @description
+  * Find centroid of the model (only take in account userData).
+  *
+  * @returns {object} The initial information with additionnal model_center argument.
+  *
+  * ```js
+  * viewer.findUserDataCentroid(model);
+  * ```
+  */
+  viewer.findUserDataCentroid = function(model) {
+    // Calculate only if needed
+    if (model.userData.model_center_offset !== undefined) {
+      return;
+    }
+
+    // Calculate bounding box for all children given by the user
+    // ignore other children
+    var min_x, max_x, min_y, max_y, min_z, max_z;
+    min_x = min_y = min_z = Number.POSITIVE_INFINITY;
+    max_x = max_y = max_z = Number.NEGATIVE_INFINITY;
+
+    model.children.forEach(function(children){
+      var model_name    = children.userData.model_name;
+      var model_data    = viewer.model_data.get(model_name);
+
+      var children_name = children.name;
+      model_data.shapes.forEach(function(shape){
+        if (shape.name !== children_name) {
+          return;
+        }
+        var bounding_box  = shape.bounding_box;
+
+        // min
+        min_x = Math.min(min_x, bounding_box.min_x);
+        min_y = Math.min(min_y, bounding_box.min_y);
+        min_z = Math.min(min_z, bounding_box.min_z);
+        // max
+        max_x = Math.max(max_x, bounding_box.max_x);
+        max_y = Math.max(max_y, bounding_box.max_y);
+        max_z = Math.max(max_z, bounding_box.max_z);
+      });
+
+      // centroid of all the model
+      var centroid = new THREE.Vector3();
+      centroid.x   =  min_x + (max_x - min_x) / 2;
+      centroid.y   =  min_y + (max_y - min_y) / 2;
+      centroid.z   =  min_z + (max_z - min_z) / 2;
+
+      model.userData.model_center  = new THREE.Vector3(centroid.x, centroid.y, centroid.z);
+    });
+  };
+
+
 
   /*
     Added by jo.

@@ -803,7 +803,7 @@ $(function() {
               element_id: "overlay-ui-template",
               viewer_insert_class: "overlay-viewer-display"
             },
-          views: ["zspace", "xspace", "yspace"],
+            views: ["zspace", "xspace", "yspace"],
           }
         });
       }

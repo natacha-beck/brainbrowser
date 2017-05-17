@@ -473,14 +473,14 @@ BrainBrowser.VolumeViewer.modules.loading = function(viewer) {
 
     var display          = VolumeViewer.createDisplay();
     var template_options = volume_description.template || {};
-    var views            = views || ["xspace", "yspace", "zspace"];
+    var views_order      = views || ["xspace", "yspace", "zspace"];
     var template;
 
     display.propagateEventTo("*", volume);
 
     container.classList.add("volume-container");
 
-    views.forEach(function(axis_name) {
+    views_order.forEach(function(axis_name) {
       var canvas    = document.createElement("canvas");
       canvas.width  = default_panel_width;
       canvas.height = default_panel_height;
@@ -523,7 +523,7 @@ BrainBrowser.VolumeViewer.modules.loading = function(viewer) {
     (function() {
       var current_target = null;
 
-      views.forEach(function(axis_name) {
+      views_order.forEach(function(axis_name) {
         var panel = display.getPanel(axis_name);
         var canvas = panel.canvas;
         var last_touch_distance = null;
