@@ -877,6 +877,9 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
       viewer.changeCenterRotationModelDataShapes(model_data, newCenter);
     });
 
+    gridManager.updateGrid();
+    viewer.updateAxes();
+
     // to be able to reset to the original position
     // we place it in the end so it does not affect when
     // calling resetCenterRotation()
