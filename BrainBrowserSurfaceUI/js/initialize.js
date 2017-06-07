@@ -59,11 +59,12 @@ function definesEventCallbacks(){
     var x = pickInfo.point.x.toPrecision(4);
     var y = pickInfo.point.y.toPrecision(4);
     var z = pickInfo.point.z.toPrecision(4);
+
+    $("#pick-name").html(pickInfo.object.name);
+    $("#pick-x").html(x);
+    $("#pick-y").html(y);
+    $("#pick-z").html(z);
     $("#pick-index").html(pickInfo.index);
-
-    var center = new THREE.Vector3(parseFloat(x),parseFloat(y),parseFloat(z));
-    gridManager.centerShape(pickInfo.object.name,center);
-
 
     viewer.setPickMarker(pickInfo.point, 0.3);
 

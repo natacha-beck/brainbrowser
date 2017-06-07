@@ -160,11 +160,6 @@ var GridManager = function(BrainBrowserViewer){
           );
         }
 
-        $("#pick-name").html(shapeNameOverall);
-        $("#pick-x").html(center.x.toPrecision(4));
-        $("#pick-y").html(center.y.toPrecision(4));
-        $("#pick-z").html(center.z.toPrecision(4));
-
         that.centerOnPoint(center);
         shapeNotFound = false;
         return;

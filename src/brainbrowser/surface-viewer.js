@@ -563,9 +563,20 @@
               viewer.changeCenterRotation2(orig);
             }
           }
+          // m
+          if (key === 77) {
+            viewer.modelCentric();
+          }
           // c
           if (key === 67) {
-            viewer.modelCentric();
+            var x    = document.getElementById("pick-x").innerHTML;
+            var y    = document.getElementById("pick-y").innerHTML;
+            var z    = document.getElementById("pick-z").innerHTML;
+            var name = document.getElementById("pick-name").innerHTML;
+            if (x !== "" && y !== "" && z != "" && name !== "") {
+              var center = new THREE.Vector3(parseFloat(x),parseFloat(y),parseFloat(z));
+              gridManager.centerShape(name,center);
+            }
           }
         });
       }
