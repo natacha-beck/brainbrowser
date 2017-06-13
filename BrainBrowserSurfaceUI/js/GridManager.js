@@ -187,7 +187,7 @@ var GridManager = function(BrainBrowserViewer){
       center: THREE.Vector3 -- will be deep copied
   */
   GridManager.prototype.centerOnPoint = function(newCenter){
-    this.viewer.changeCenterRotation2(newCenter);
+    this.viewer.changeCenterRotation(newCenter);
   };
 
 

@@ -91,7 +91,7 @@ var ModelLoader = function(BrainBrowserViewer){
       complete: function(){
         viewer.modelCentric();
         that.doneOpeningFile();
-        document.getElementById('modelFilename').innerHTML = "";
+        document.getElementById('modelFilename').innerHTML     = "";
         document.getElementById('noteModelFilename').innerHTML = "";
       }
     });
