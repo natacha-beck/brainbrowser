@@ -369,7 +369,6 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     if (viewer.pickMarker.children.length === 0) {
       var geometry = new THREE.SphereGeometry(radius);
       var material = new THREE.MeshBasicMaterial({color: color});
-
       var sphere   = new THREE.Mesh(geometry, material);
       sphere.position.set(vector3.x, vector3.y, vector3.z);
 
@@ -730,7 +729,6 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
 
 
     viewer.model.children.forEach(function(children) {
-      // Return if children was not part of the original model (e.g: axes and grid)
       children.translateX(offset_model.x);
       children.translateY(offset_model.y);
       children.translateZ(offset_model.z);

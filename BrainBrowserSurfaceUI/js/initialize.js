@@ -109,8 +109,10 @@ function definesEventCallbacks(){
       var localCoord = new THREE.Vector3().copy(intersectModel.point);
       intersectModel.object.parent.worldToLocal(localCoord);
 
+      var model_center_offset = viewer.model.userData.model_center_offset || new THREE.Vector3(0,0,0);
+
       annotationController.addAnnotation(
-        [[localCoord.x, localCoord.y, localCoord.z]], // array of points (only one here)
+        [[localCoord.x + model_center_offset.x, localCoord.y + model_center_offset.y, localCoord.z + model_center_offset.z]], // array of points (only one here)
         false, // isClosed
         null, // name
         null, // description
