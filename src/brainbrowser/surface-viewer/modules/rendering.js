@@ -774,11 +774,23 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   */
   viewer.modelCentric = function() {
     var model = viewer.model;
+    var first_recenter = false;
+
+    if ( model.userData.model_center_offset === undefined){
+      first_recenter = true
+    }
+
     viewer.findUserDataCentroid(model);
     var center = model.userData.model_center || new THREE.Vector3(0,0,0);
 
     // Set center position
     viewer.changeCenterRotation(center);
+
+    if (first_recenter) {
+      viewer.scene.translateX(-viewer.model.userData.model_center_offset.x);
+      viewer.scene.translateY(-viewer.model.userData.model_center_offset.y);
+      viewer.scene.translateZ(-viewer.model.userData.model_center_offset.z);
+    }
 
     viewer.updated = true;
   };

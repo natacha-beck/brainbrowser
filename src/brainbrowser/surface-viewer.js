@@ -556,7 +556,7 @@
         document.addEventListener("keyup", function(e) {
           var key = e.which;
           // i
-          if (key === 73 && e.ctrlKey) {
+          if (key === 73 && e.shiftKey) {
             if (viewer.totalOffset) {
               var totalOffset = viewer.totalOffset;
               var orig        = new THREE.Vector3(-totalOffset.x, -totalOffset.y, -totalOffset.z);
@@ -564,11 +564,11 @@
             }
           }
           // m
-          if (key === 77 && e.ctrlKey) {
+          if (key === 77 && e.shiftKey) {
             viewer.modelCentric();
           }
           // c
-          if (key === 67 && e.ctrlKey) {
+          if (key === 67 && e.shiftKey) {
             var x    = document.getElementById("pick-x").innerHTML;
             var y    = document.getElementById("pick-y").innerHTML;
             var z    = document.getElementById("pick-z").innerHTML;
