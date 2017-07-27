@@ -33,11 +33,6 @@ var ModelLoader = function(BrainBrowserViewer){
 
   this.viewer = BrainBrowserViewer;
 
-  // callback on the open button
-  this.openButton = document.getElementById("modelOpener");
-  this.openButton.addEventListener('change', this.newModelToLoad.bind(this), false);
-
-
   var that = this;
 
   // to slide the right pannel
@@ -110,8 +105,7 @@ var ModelLoader = function(BrainBrowserViewer){
 
     // The type is known
     if(type){
-      document.getElementById("modelFormatSelector").value = type;
-
+      
       this.viewer.loadModelFromURL(url, {
           format: type,
           complete: function(){

@@ -31,10 +31,6 @@ var VertexIndexingController = function(BrainBrowserViewer){
     }
   ];
 
-  // callback on the open button
-  this.openButton = document.getElementById("intensityDataOpener");
-  this.openButton.addEventListener('change', this.newIntensityToLoad.bind(this), false);
-
   var that = this;
 
   $("#reloadIntensity").click(function(){
