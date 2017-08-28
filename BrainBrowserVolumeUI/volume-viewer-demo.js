@@ -38,7 +38,7 @@ $(function() {
   // Start running the Volume Viewer
   /////////////////////////////////////
   window.viewer = BrainBrowser.VolumeViewer.start("brainbrowser", function(viewer) {
-    var loading_div = $("#loading");
+    var loading_div = $("#spinner");
 
     ///////////////////////////
     // Set up global UI hooks.
@@ -782,6 +782,7 @@ $(function() {
 
     /* A wrapping function to load Models */
     function wrapLoadModels(volumes) {
+      loading_div.show();
       viewer.clearVolumes();
       if (volumes.length === 1 )
         viewer.loadVolume(
@@ -804,6 +805,10 @@ $(function() {
               viewer_insert_class: "overlay-viewer-display"
             },
             views: ["zspace", "xspace", "yspace"],
+          },
+          complete: function() {
+            loading_div.hide();
+            $("#brainbrowser-wrapper").slideDown({duration: 600});
           }
         });
       }
