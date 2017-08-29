@@ -160,11 +160,6 @@ var GridManager = function(BrainBrowserViewer){
           );
         }
 
-        $("#pick-name").html(shapeNameOverall);
-        $("#pick-x").html(center.x.toPrecision(4));
-        $("#pick-y").html(center.y.toPrecision(4));
-        $("#pick-z").html(center.z.toPrecision(4));
-
         that.centerOnPoint(center);
         shapeNotFound = false;
         return;
@@ -192,7 +187,7 @@ var GridManager = function(BrainBrowserViewer){
       center: THREE.Vector3 -- will be deep copied
   */
   GridManager.prototype.centerOnPoint = function(newCenter){
-    this.viewer.changeCenterRotation2(newCenter);
+    this.viewer.changeCenterRotation(newCenter);
   };
 
 

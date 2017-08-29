@@ -58,12 +58,12 @@ var ShapePicker = function(BrainBrowserViewer){
 
     $("#brainbrowser").click(function(event) {
       var mouse = new THREE.Vector2();
-      mouse.x = (that.viewer.mouse.x / that.viewer.dom_element.offsetWidth) * 2 - 1;
-      mouse.y = (- that.viewer.mouse.y / that.viewer.dom_element.offsetHeight) * 2 + 1;
+      mouse.x   = (  that.viewer.mouse.x / that.viewer.dom_element.offsetWidth)  * 2 - 1;
+      mouse.y   = (- that.viewer.mouse.y / that.viewer.dom_element.offsetHeight) * 2 + 1;
 
-      // raycaster, the old fashioned way (I don't think it's like like in recent release)
+      // raycaster, the old fashioned way (I don't think it's like that in recent release)
       var raycaster = new THREE.Raycaster();
-      var vector       = new THREE.Vector3(mouse.x, mouse.y, that.viewer.camera.near);
+      var vector    = new THREE.Vector3(mouse.x, mouse.y, that.viewer.camera.near);
       vector.unproject(that.viewer.camera);
 
       raycaster.set(
@@ -71,12 +71,12 @@ var ShapePicker = function(BrainBrowserViewer){
         vector.sub(that.viewer.camera.position).normalize()
       );
 
-      var intersectsModel = raycaster.intersectObject(that.viewer.model, true);
+      var intersectsModel       = raycaster.intersectObject(that.viewer.model, true);
       var intersectsAnnotations = raycaster.intersectObject(that.viewer.annotationSystem, true);
 
       callback(
         event,
-        intersectsModel.length ? intersectsModel[0] : null,
+        intersectsModel.length       ? intersectsModel[0]       : null,
         intersectsAnnotations.length ? intersectsAnnotations[0] : null
       );
 

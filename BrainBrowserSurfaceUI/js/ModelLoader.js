@@ -25,7 +25,7 @@ var ModelLoader = function(BrainBrowserViewer){
       type: "freesurferasc"
     },
     {
-      ext: [/h\.inflated(\.gz)?$/,/h\.white(\.gz)?$/,/h\.pial(\.gz)?$/,/h\.mid(\.gz)?$/,/binary/ ],
+      ext: [/h\.inflated(\.gz)?$/,/h\.white(\.gz)?$/,/h\.pial(\.gz)?$/,/h\.mid(\.gz)?$/,/binary/,/h\.orig(\.gz)?$/ ],
       type: "freesurferbin"
     }
   ];
@@ -89,8 +89,9 @@ var ModelLoader = function(BrainBrowserViewer){
     this.viewer.loadModelFromFile(fileOpenerElem, {
       format: type,
       complete: function(){
+        viewer.modelCentric();
         that.doneOpeningFile();
-        document.getElementById('modelFilename').innerHTML = "";
+        document.getElementById('modelFilename').innerHTML     = "";
         document.getElementById('noteModelFilename').innerHTML = "";
       }
     });

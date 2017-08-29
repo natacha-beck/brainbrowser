@@ -195,6 +195,20 @@ canvas.slice-display {
 #leftSidebar .controls {
     padding-left: 15px;
     width: inherit;
+    position: fixed;
+}
+
+
+#leftSidebar{
+  position: fixed;
+}
+
+#hideLeft {
+  position: fixed;
+}
+
+.logo {
+  position: fixed;
 }
 
 #brainbrowser {

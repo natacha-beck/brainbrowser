@@ -59,11 +59,12 @@ function definesEventCallbacks(){
     var x = pickInfo.point.x.toPrecision(4);
     var y = pickInfo.point.y.toPrecision(4);
     var z = pickInfo.point.z.toPrecision(4);
+
+    $("#pick-name").html(pickInfo.object.name);
+    $("#pick-x").html(x);
+    $("#pick-y").html(y);
+    $("#pick-z").html(z);
     $("#pick-index").html(pickInfo.index);
-
-    var center = new THREE.Vector3(parseFloat(x),parseFloat(y),parseFloat(z));
-    gridManager.centerShape(pickInfo.object.name,center);
-
 
     viewer.setPickMarker(pickInfo.point, 0.3);
 
@@ -108,8 +109,10 @@ function definesEventCallbacks(){
       var localCoord = new THREE.Vector3().copy(intersectModel.point);
       intersectModel.object.parent.worldToLocal(localCoord);
 
+      var model_center_offset = viewer.model.userData.model_center_offset || new THREE.Vector3(0,0,0);
+
       annotationController.addAnnotation(
-        [[localCoord.x, localCoord.y, localCoord.z]], // array of points (only one here)
+        [[localCoord.x + model_center_offset.x, localCoord.y + model_center_offset.y, localCoord.z + model_center_offset.z]], // array of points (only one here)
         false, // isClosed
         null, // name
         null, // description

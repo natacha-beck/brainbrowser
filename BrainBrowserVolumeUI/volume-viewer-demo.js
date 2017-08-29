@@ -124,7 +124,7 @@ $(function() {
           },
           {
             type: 'mgh',
-            url: "models/dti.mgh",
+            url: "models/dti.mgh.gz",
             template: {
               element_id: "volume-ui-template",
               viewer_insert_class: "volume-viewer-display"

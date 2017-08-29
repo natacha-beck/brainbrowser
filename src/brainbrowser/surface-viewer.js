@@ -555,17 +555,28 @@
       function keyboardControls() {
         document.addEventListener("keyup", function(e) {
           var key = e.which;
-          // o
-          if (key === 79) {
+          // i
+          if (key === 73 && e.shiftKey) {
             if (viewer.totalOffset) {
               var totalOffset = viewer.totalOffset;
-              var orig = new THREE.Vector3(-totalOffset.x, -totalOffset.y, -totalOffset.z);
-              viewer.changeCenterRotation2(orig);
+              var orig        = new THREE.Vector3(-totalOffset.x, -totalOffset.y, -totalOffset.z);
+              viewer.changeCenterRotation(orig);
             }
           }
-          // c
-          if (key === 67) {
+          // m
+          if (key === 77 && e.shiftKey) {
             viewer.modelCentric();
+          }
+          // c
+          if (key === 67 && e.shiftKey) {
+            var x    = document.getElementById("pick-x").innerHTML;
+            var y    = document.getElementById("pick-y").innerHTML;
+            var z    = document.getElementById("pick-z").innerHTML;
+            var name = document.getElementById("pick-name").innerHTML;
+            if (x !== "" && y !== "" && z !== "" && name !== "") {
+              var center = new THREE.Vector3(parseFloat(x),parseFloat(y),parseFloat(z));
+              gridManager.centerShape(name,center);
+            }
           }
         });
       }

@@ -34,7 +34,7 @@
     },
     {
       name: "Spectral",
-      url: "color-maps/spectral-brainview.txt",
+      url: "color-maps/sb.txt",
       cursor_color: "#FFFFFF"
     },
     {

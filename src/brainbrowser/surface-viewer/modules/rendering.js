@@ -369,7 +369,6 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     if (viewer.pickMarker.children.length === 0) {
       var geometry = new THREE.SphereGeometry(radius);
       var material = new THREE.MeshBasicMaterial({color: color});
-
       var sphere   = new THREE.Mesh(geometry, material);
       sphere.position.set(vector3.x, vector3.y, vector3.z);
 
@@ -701,7 +700,8 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     return vertex_data;
   };
 
-  /**
+
+/**
   * @doc function
   * @name viewer.rendering:changeCenterRotation
   * @param {center} a Vector3 that indigate the new center
@@ -715,60 +715,50 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   * ```
   */
   viewer.changeCenterRotation = function(center) {
+    var model = viewer.model;
+    scene     = viewer.scene;
+
     var offset     = new THREE.Vector3(0 , 0, 0);
     // Copy the center into offset, in order to keep center intact
     // we do not want to manipulate center
     offset.copy(center);
-    var model      = viewer.model;
 
     // Adjust the offset value if needed (e.g: if the model was already moved)
-    var offset_old = model.userData.model_center_offset || new THREE.Vector3(0,0,0);
-    offset.x       = -offset_old.x - offset.x;
-    offset.y       = -offset_old.y - offset.y;
-    offset.z       = -offset_old.z - offset.z;
-    offset.negate();
+    var offset_old   = model.userData.model_center_offset || new THREE.Vector3(0,0,0);
+    var offset_model = new THREE.Vector3(-offset.x + offset_old.x, -offset.y + offset_old.y, -offset.z + offset_old.z);
 
-    /*
-      Adjsut all the children.
-    */
 
-    // Translate to original place first then translate to new place
-    model.children.forEach(function(children) {
-      // Return if children was not part of the original model (e.g: axes and grid)
-      if (Object.keys(children.userData).length === 0 && children.userData.constructor === Object) { return ; }
-      children.translateX(offset_old.x - offset.x);
-      children.translateY(offset_old.y - offset.y);
-      children.translateZ(offset_old.z - offset.z);
+    viewer.model.children.forEach(function(children) {
+      children.translateX(offset_model.x);
+      children.translateY(offset_model.y);
+      children.translateZ(offset_model.z);
     });
 
-    /*
-      Adjsut the parent (a.k.a: the scene)
-    */
+    viewer.pickMarker.translateX(offset_model.x);
+    viewer.pickMarker.translateY(offset_model.y);
+    viewer.pickMarker.translateZ(offset_model.z);
+
+    viewer.annotationSystem.translateX(offset_model.x);
+    viewer.annotationSystem.translateY(offset_model.y);
+    viewer.annotationSystem.translateZ(offset_model.z);
 
     // Unapply previous adjustment to scene position due to user manual rotation (this does nothing / has no effect before 1st rotation)
-    var inverse_matrix = new THREE.Matrix4().getInverse(model.matrix);
-    model.parent.position.applyMatrix4(inverse_matrix);
-
-    // Translate the scene to original position
-    model.parent.translateX(-offset_old.x);
-    model.parent.translateY(-offset_old.y);
-    model.parent.translateZ(-offset_old.z);
+    var inverse_matrix = new THREE.Matrix4().getInverse(viewer.graphicObjects.matrix);
+    scene.position.applyMatrix4(inverse_matrix);
 
     // Compensate scene position for all offsets done to model above
-    model.parent.translateX(offset.x);
-    model.parent.translateY(offset.y);
-    model.parent.translateZ(offset.z);
+    scene.translateX(offset.x - offset_old.x);
+    scene.translateY(offset.y - offset_old.y);
+    scene.translateZ(offset.z - offset_old.z);
 
     // Reapply previous adjustment to scene position due to user manual rotation (this does nothing / has no effect before 1st rotation)
-    inverse_matrix = new THREE.Matrix4().getInverse(model.matrix);
-    model.parent.position.applyMatrix4(model.matrix);
+    inverse_matrix = new THREE.Matrix4().getInverse(viewer.graphicObjects.matrix);
+    scene.position.applyMatrix4(viewer.graphicObjects.matrix);
 
-    // Save offset information in userData
-    viewer.model.userData.model_center_offset = offset;
+    model.userData.model_center_offset = offset;
 
     viewer.updated = true;
   };
-
 
   /**
   * @doc function
@@ -784,11 +774,23 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   */
   viewer.modelCentric = function() {
     var model = viewer.model;
+    var first_recenter = false;
+
+    if ( model.userData.model_center_offset === undefined){
+      first_recenter = true
+    }
+
     viewer.findUserDataCentroid(model);
     var center = model.userData.model_center || new THREE.Vector3(0,0,0);
 
     // Set center position
-    viewer.changeCenterRotation2(center);
+    viewer.changeCenterRotation(center);
+
+    if (first_recenter) {
+      viewer.scene.translateX(-viewer.model.userData.model_center_offset.x);
+      viewer.scene.translateY(-viewer.model.userData.model_center_offset.y);
+      viewer.scene.translateZ(-viewer.model.userData.model_center_offset.z);
+    }
 
     viewer.updated = true;
   };
@@ -877,6 +879,9 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
       viewer.changeCenterRotationModelDataShapes(model_data, newCenter);
     });
 
+    viewer.gridManager.updateGrid();
+    viewer.updateAxes();
+
     // to be able to reset to the original position
     // we place it in the end so it does not affect when
     // calling resetCenterRotation()
@@ -891,7 +896,7 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   */
   viewer.resetCenterRotation = function(){
     viewer.totalOffset.negate();
-    viewer.changeCenterRotation2(viewer.totalOffset);
+    viewer.changeCenterRotation(viewer.totalOffset);
     viewer.totalOffset.set(0, 0, 0);
   };
 
