@@ -213,6 +213,18 @@ $(function() {
     // Should cursors in all panels be synchronized?
     $("#syncVolumes").click(function() {
       viewer.synced = viewer.synced ? false : true;
+      var isActive  = !viewer.synced;
+      var checkbox  = $(this).find(".fa");
+
+      if(isActive){
+        $(checkbox).addClass("fa-square");
+        $(checkbox).removeClass("fa-check-square");
+      }else{
+        $(checkbox).removeClass("fa-square");
+        $(checkbox).addClass("fa-check-square");
+      }
+
+
       if (viewer.synced) {
         viewer.resetDisplays();
         viewer.redrawVolumes();

@@ -127,6 +127,12 @@ a:hover{
   margin: 10px 0 10px 0;
 }
 
+.title{
+  padding: 20px;
+  text-align: center;
+  color: black;
+  white-space: nowrap;
+}
 
 .label{
   padding: 5px;
