@@ -648,13 +648,14 @@ $(function() {
             context.putImageData(image_data, x, y);
           }
 
+          // Retrieve image from canvas and display it
+          // in a dialog box.
           img.onload = function() {
-            var link      = document.createElement('a');
-            link.href     = img.src;
-            link.download = space_names[axis_name] + "Slices";
-            document.body.appendChild(link);
-            link.click();
-            document.body.appendChild(link);
+            $("<div></div>").append(img).dialog({
+              title: space_names[axis_name] + " Slices",
+              height: 600,
+              width: img.width
+            });
           };
 
           img.src = canvas.toDataURL();
