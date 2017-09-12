@@ -38,7 +38,7 @@ $(function() {
   // Start running the Volume Viewer
   /////////////////////////////////////
   window.viewer = BrainBrowser.VolumeViewer.start("brainbrowser", function(viewer) {
-    var loading_div = $("#loading");
+    var loading_div = $("#spinner");
 
     ///////////////////////////
     // Set up global UI hooks.
@@ -213,6 +213,18 @@ $(function() {
     // Should cursors in all panels be synchronized?
     $("#syncVolumes").click(function() {
       viewer.synced = viewer.synced ? false : true;
+      var isActive  = !viewer.synced;
+      var checkbox  = $(this).find(".fa");
+
+      if(isActive){
+        $(checkbox).addClass("fa-square");
+        $(checkbox).removeClass("fa-check-square");
+      }else{
+        $(checkbox).removeClass("fa-square");
+        $(checkbox).addClass("fa-check-square");
+      }
+
+
       if (viewer.synced) {
         viewer.resetDisplays();
         viewer.redrawVolumes();
@@ -782,6 +794,7 @@ $(function() {
 
     /* A wrapping function to load Models */
     function wrapLoadModels(volumes) {
+      loading_div.show();
       viewer.clearVolumes();
       if (volumes.length === 1 )
         viewer.loadVolume(
@@ -804,6 +817,10 @@ $(function() {
               viewer_insert_class: "overlay-viewer-display"
             },
             views: ["zspace", "xspace", "yspace"],
+          },
+          complete: function() {
+            loading_div.hide();
+            $("#brainbrowser-wrapper").slideDown({duration: 600});
           }
         });
       }
