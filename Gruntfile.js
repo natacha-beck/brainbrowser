@@ -127,7 +127,8 @@ module.exports = function(grunt) {
             alert: true,
             console: true,
             pako: true,
-            TextDecoder: true
+            TextDecoder: true,
+            gridManager: true,
           }
         },
         src: [
@@ -180,6 +181,12 @@ module.exports = function(grunt) {
             definesEventCallbacks: true,
             defineUiCallbacks: true,
             viewer: true,
+            axisBox: true,
+            pickInfo: true,
+            shapePicker: true,
+            gridManager: true,
+            shapeController: true,
+            bbViewer: true,
           }
         },
         src: [
@@ -194,7 +201,7 @@ module.exports = function(grunt) {
           "BrainBrowserSurfaceUI/js/ShapeController.js",
           "BrainBrowserSurfaceUI/js/GridManager.js",
           "BrainBrowserSurfaceUI/js/AnnotationController.js",
-          // "BrainBrowserSurfaceUI/js/initialize.js"
+          "BrainBrowserSurfaceUI/js/initialize.js"
         ]
       },
       BrainBrowserVolumeUI: {

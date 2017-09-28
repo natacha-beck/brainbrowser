@@ -777,7 +777,7 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     var first_recenter = false;
 
     if ( model.userData.model_center_offset === undefined){
-      first_recenter = true
+      first_recenter = true;
     }
 
     viewer.findUserDataCentroid(model);

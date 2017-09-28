@@ -6,8 +6,13 @@
   Licence: MIT
 */
 
+/*jshint sub:true*/
+/*jshint unused:false*/
+
+var THREE = BrainBrowser.SurfaceViewer.THREE;
+
 function init(){
-  THREE = BrainBrowser.SurfaceViewer.THREE;
+  "use strict";
   initTemplates();
 
   // Box that shows the axes orientation on the left column
@@ -24,9 +29,6 @@ function init(){
   $.hbsPreload("about");
   $('#about').hbsAppend('about', {});
 
-
-
-
 }
 
 
@@ -34,6 +36,7 @@ function init(){
   Defines Handlebars variables
 */
 function initTemplates(){
+  "use strict";
   $.hbs({
     templatePath: 'templates', // folder where to find the templates
     templateExtension: 'hbs', // file extension for templates
@@ -48,14 +51,14 @@ function initTemplates(){
   Needs viewer to be ready.
 */
 function definesEventCallbacks(){
+  "use strict";
 
   // Callback: when shift+click is performed on a shape
   shapePicker.shiftPick(function(shapeInfo){
-    var shapeNameOverall = shapeInfo.object.name;
     shapeController.focusOnSlider(shapeInfo.object.name);
 
     // Vertex information
-    pickInfo = viewer.pick();
+    var pickInfo = viewer.pick();
     var x = pickInfo.point.x.toPrecision(4);
     var y = pickInfo.point.y.toPrecision(4);
     var z = pickInfo.point.z.toPrecision(4);
@@ -129,7 +132,7 @@ function definesEventCallbacks(){
 
       // doesnt necessary draw (in case of hidden) but addapt the size anyway
       bbViewer.updateAxes();
-  });
+    });
 
 
   // updated the quaternion of the axis box,
@@ -147,6 +150,7 @@ function definesEventCallbacks(){
   (this is why it's not part of initCallbacks() )
 */
 function defineUiCallbacks(){
+  "use strict";
 
   // to slide the right pannel
   $("#hideRight").click(function(){
@@ -184,7 +188,7 @@ function defineUiCallbacks(){
 
   // to show legend table
   $("#showLegendBox").click(function(){
-    $("#legendBox").toggle(!$("#legendBox").is(":visible"))
+    $("#legendBox").toggle(!$("#legendBox").is(":visible"));
   });
 
   // handle the grid UI
@@ -193,8 +197,8 @@ function defineUiCallbacks(){
       $("#gridPlane").css("display","flex");
       $("#gridStep").css("display","flex");
     } else {
-      $("#gridPlane").css("display","none")
-      $("#gridStep").css("display","none")
+      $("#gridPlane").css("display","none");
+      $("#gridStep").css("display","none");
     }
 
     gridManager.toggleGrid();
@@ -203,7 +207,7 @@ function defineUiCallbacks(){
     var grids_div = $(".grid");
     grids_div.each(function(id){
       var grid_div = grids_div[id];
-      var plane    = grid_div.attributes["plane"].value;
+      var plane    = grid_div.attributes['plane'].value;
       var grid     = gridManager.gridSystem.getObjectByName(plane);
       var isActive = grid_div.classList.contains("activated");
 
@@ -220,12 +224,11 @@ function defineUiCallbacks(){
     var plane = $(this).attr("plane");
     showActivation( this );
 
-    if (plane === undefined) {return};
+    if (plane === undefined) {return;}
 
-    var grid = undefined;
-    grid     = gridManager.gridSystem.getObjectByName(plane);
+    var grid     = gridManager.gridSystem.getObjectByName(plane);
 
-    if (grid === undefined) {return};
+    if (grid === undefined) {return;}
 
 
     grid.visible  = this.classList.contains("activated");
@@ -252,7 +255,7 @@ function defineUiCallbacks(){
 
   // to slide the left pannel
   $("#toggleWireFrameBt").click(function(){
-    var isActive = parseInt( $(this).attr("active") );
+    var isActive = parseInt( $(this).attr("active"), 10 );
     bbViewer.setWireframe( !isActive );
     $(this).attr("active", +!isActive );
     showActivation( this );
@@ -288,7 +291,7 @@ function defineUiCallbacks(){
 
   // Enable the 3D stereoscopic thing
   $("#threedeeBt").click(function(){
-    var isActive = parseInt( $(this).attr("active") );
+    var isActive = parseInt( $(this).attr("active"), 10 );
 
     if(isActive){
       bbViewer.setEffect("None");
@@ -376,6 +379,8 @@ function defineUiCallbacks(){
 // just add some arker blue background to a button when clicked,
 // and removes it when clicked again
 function showActivation(jqElem){
+  "use strict";
+
   if( $(jqElem).hasClass("activated") ){
     $(jqElem).removeClass("activated");
   }else {
