@@ -210,10 +210,11 @@ var UriParamController = function(){
     We dont necessary need to specify both in argument.
   */
   UriParamController.prototype.intensityAndColormapAndLabel = function(){
-    var intensity = this.getHashValue("intensity");
+    var intensity        = this.getHashValue("intensity");
+    var intensity_format = this.getHashValue("intensity_format") || undefined;
 
     if(intensity){
-      vertexIndexingController.loadIntensityDataFromURL(intensity[0]);
+      vertexIndexingController.loadIntensityDataFromURL(intensity[0], intensity_format);
     }
 
 

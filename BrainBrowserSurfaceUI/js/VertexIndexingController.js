@@ -145,8 +145,8 @@ var VertexIndexingController = function(BrainBrowserViewer){
     So that it's accessible from the outside,
     for exemple by the UriParamController.
   */
-  VertexIndexingController.prototype.loadIntensityDataFromURL = function(url){
-    this.viewer.loadIntensityDataFromURL(url);
+  VertexIndexingController.prototype.loadIntensityDataFromURL = function(url,format){
+    this.viewer.loadIntensityDataFromURL(url, {format: format});
   };
 
 
