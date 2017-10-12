@@ -75,6 +75,12 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     autoClear: false//,
     /*antialias: true*/
   });
+
+  // Get/SET OES_element_index_uint on main canvas.
+  var canvas = renderer.domElement;
+  var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+  gl.getExtension("OES_element_index_uint");
+
   var scene = new THREE.Scene();
   viewer.scene = scene;
   var camera = new THREE.PerspectiveCamera(30, viewer.dom_element.offsetWidth / viewer.dom_element.offsetHeight, 1, 3000);
