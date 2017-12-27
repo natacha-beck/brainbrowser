@@ -12,6 +12,7 @@ var shapeController = null;
 var modelLoader = null;
 var shapePicker = null;
 var annotationController = null;
+var axisBox = null;
 
 // Deals with grid display and size
 var gridManager = null;
