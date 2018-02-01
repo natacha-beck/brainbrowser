@@ -543,7 +543,9 @@
       });
 
       BrainBrowser.events.addEventModel(viewer);
-
+      $(window).resize(function() {
+        viewer.updateViewport();
+      });
       // Trigger a redraw on any event.
       BrainBrowser.events.addEventListener("*", function(event_name) {
         if (event_name !== "draw") {
@@ -704,5 +706,3 @@
   }
 
 })();
-
-
