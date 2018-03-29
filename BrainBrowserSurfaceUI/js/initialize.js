@@ -168,8 +168,8 @@ function defineUiCallbacks(){
   $("#resetview").click(function(){
     // make all the shapes visible with max opacity
     shapeController.allSlidersToMax();
-    // put all the shapes back to their original position
-    bbViewer.resetCenterRotation();
+    // put all the shapes back to the center of the model
+    bbViewer.modelCentric();
     // fit the grid to the original view
     gridManager.updateGrid();
     // fit the axis to the original position
