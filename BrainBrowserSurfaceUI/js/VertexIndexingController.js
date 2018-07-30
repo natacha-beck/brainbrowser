@@ -26,7 +26,7 @@ var VertexIndexingController = function(BrainBrowserViewer){
       type: "freesurferasc"
     },
     {
-      ext: [/\.gii(\.gz)$/],
+      ext: [/\.gii(\.gz)?$/],
       type: "gifti"
     }
   ];

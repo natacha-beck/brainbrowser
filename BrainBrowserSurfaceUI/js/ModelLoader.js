@@ -27,6 +27,9 @@ var ModelLoader = function(BrainBrowserViewer){
     {
       ext: [/h\.inflated(\.gz)?$/,/h\.white(\.gz)?$/,/h\.pial(\.gz)?$/,/h\.mid(\.gz)?$/,/binary/,/h\.orig(\.gz)?$/ ],
       type: "freesurferbin"
+    },    {
+      ext: [/\.gii(\.gz)?$/],
+      type: "gifti"
     }
   ];
   // we also have wavefrontobj and unknown
