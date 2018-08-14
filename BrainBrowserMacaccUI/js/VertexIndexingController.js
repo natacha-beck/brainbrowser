@@ -110,14 +110,14 @@ var VertexIndexingController = function(BrainBrowserViewer){
 
 
     this.viewer.addEventListener("changeintensityrange", function(event) {
-      //console.log("event: changeintensityrange");
+      // console.log("event: changeintensityrange");
       that.intensityData = event.intensity_data;
       that.updateSpectrumCanvas();
     });
 
 
     this.viewer.addEventListener("loadintensitydata", function(event) {
-      //console.log("event: loadintensitydata");
+      // console.log("event: loadintensitydata");
       that.intensityData = event.intensity_data;
       that.updateSpectrumCanvas();
       that.updateSlider();
@@ -127,12 +127,12 @@ var VertexIndexingController = function(BrainBrowserViewer){
     });
 
     this.viewer.addEventListener("updatecolors", function() {
-      //console.log("event: updatecolors");
+      // console.log("event: updatecolors");
       that.updateSpectrumCanvas();
     });
 
     this.viewer.addEventListener("updateintensitydata", function() {
-      //console.log("event: updateintensitydata");
+      // console.log("event: updateintensitydata");
     });
   };
 
@@ -141,8 +141,12 @@ var VertexIndexingController = function(BrainBrowserViewer){
     So that it's accessible from the outside,
     for exemple by the UriParamController.
   */
-  VertexIndexingController.prototype.loadIntensityDataFromURL = function(url){
-    this.viewer.loadIntensityDataFromURL(url);
+  VertexIndexingController.prototype.loadIntensityDataFromURL = function(url, options){
+    options = options || {};
+    options.min = parseInt($("#minSliderLbl").val());
+    options.max = parseInt($("#maxSliderLbl").val());
+    options.result_type = "arraybuffer";
+    this.viewer.loadIntensityDataFromURL(url,options);
   };
 
 
@@ -409,7 +413,7 @@ var VertexIndexingController = function(BrainBrowserViewer){
     });
 
     $(this.colorRangeSlider).slider("enable");
-    this.updateMinMaxLabel(that.intensityData.min, that.intensityData.max);
+    // this.updateMinMaxLabel(that.intensityData.min, that.intensityData.max);
   };
 
 

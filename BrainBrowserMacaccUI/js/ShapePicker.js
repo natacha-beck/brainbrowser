@@ -31,6 +31,7 @@ var ShapePicker = function(BrainBrowserViewer){
       var shapeInfo = that.viewer.pick(that.viewer.mouse.x, that.viewer.mouse.y);
 
       if(shapeInfo){
+        macacc.loadMap(shapeInfo.index);
         callback(event, shapeInfo);
       }
 

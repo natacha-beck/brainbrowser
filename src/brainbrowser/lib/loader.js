@@ -77,8 +77,8 @@
               if (result.constructor === ArrayBuffer) {
                 try {
                   // See if the data can be inflated.
-                  var unzipped = pako.inflate(result);
-                  result = unzipped.buffer;
+                  var unzipped = pako.inflate(result, {to: 'string'});
+                  result = unzipped;
                 } catch(e) {
                  // pako probably didn't recognize this as gzip.
                 }

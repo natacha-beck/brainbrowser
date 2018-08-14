@@ -25,6 +25,8 @@ var vertexIndexingController = null;
 // pointer on viewer for when it gets loaded
 var bbViewer = null;
 
+// for maccac integration
+var macacc = null;
 
 $(function() {
   "use strict";
@@ -59,6 +61,9 @@ $(function() {
     annotationController     = new AnnotationController(viewer);
 
     vertexIndexingController = new VertexIndexingController(viewer);
+
+    // for macacc integration
+    macacc                   = new Macacc(viewer);
 
     // init all the callbacks related to ui
     definesEventCallbacks();
