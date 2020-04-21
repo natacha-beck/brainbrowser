@@ -253,10 +253,20 @@ function defineUiCallbacks(){
   });
 
 
-  // to slide the left pannel
+  // toogle WireFrame
   $("#toggleWireFrameBt").click(function(){
     var isActive = parseInt( $(this).attr("active"), 10 );
     bbViewer.setWireframe( !isActive );
+    $(this).attr("active", +!isActive );
+    showActivation( this );
+  });
+
+
+
+  // toogle WireFrame + Surface
+  $("#toggleWireFrameAndSurfaceBt").click(function(){
+    var isActive = parseInt( $(this).attr("active"), 10 );
+    bbViewer.setWireframe( !isActive, { keep_surface: true } );
     $(this).attr("active", +!isActive );
     showActivation( this );
   });
