@@ -72,8 +72,8 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
   var renderer = new THREE.WebGLRenderer({
     preserveDrawingBuffer: true,
     alpha: true,
-    autoClear: false//,
-    /*antialias: true*/
+    autoClear: false,
+    antialias: true
   });
 
   // Get/SET OES_element_index_uint on main canvas.
